@@ -39,10 +39,9 @@ public class Dao {
     }
 
     public void PersonaAdd(Persona p) throws Exception{
-        String sql="insert into personas.persona (id, nombre, sexo, estado_codigo) "+
+        String sql="insert into personas.persona (idPersona, nombre, sexo, estado_codigo) "+
                 "values('%s','%s','%s','%s')";
         sql=String.format(sql,p.getId(),p.getNombre(),p.getSexo(),p.getEstado().estado);
-
        System.out.println(sql);
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -51,9 +50,9 @@ public class Dao {
     }
 
     public void PersonaUpdate(Persona p) throws Exception{
-        String sql="update personas.persona set nombre='%s',sexo='%s' "+
+        String sql="update personas.persona set nombre='%s',sexo='%s', estado_codigo='%s' "+
                 "where idPersona='%s'";
-        sql=String.format(sql,p.getNombre(),p.getSexo(),p.getId());
+        sql=String.format(sql,p.getNombre(),p.getSexo(),p.getId(), p.getEstado().estado);
         System.out.println("Salida: "+sql );
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -71,7 +70,7 @@ public class Dao {
         return resultado;
     }
     
-    public List<Persona> PersonaSearch(String nombre){
+    public List<Persona> PersonaSearch(String nombre) throws Exception{
         List<Persona> resultado = new ArrayList<Persona>();
         try {
             String sql="select * from "+
@@ -86,12 +85,25 @@ public class Dao {
         } catch (SQLException ex) { }
         return resultado;
     }
-    private Persona persona(ResultSet rs){
+    Estado buscarEstado(String cod) throws Exception{
+        ArrayList<Estado> lista= (ArrayList<Estado>) getEstado();
+        int tam=lista.size();
+        Estado estadito=null;
+        for(int i=0;i<tam;i++){
+           estadito = lista.get(i);
+            if(estadito.estado.equals(cod)){
+                return estadito;
+            }
+        }
+        return new Estado("000","Sin Estado");
+    }
+    private Persona persona(ResultSet rs) throws Exception{
         try {
             Persona p= new Persona();
             p.setId(rs.getString("idPersona"));
             p.setNombre(rs.getString("nombre"));
             p.setSexo(rs.getString("sexo").charAt(0));
+            p.setEstado(buscarEstado(rs.getString("estado_codigo")));
             return p;
         } catch (SQLException ex) {
             return null;

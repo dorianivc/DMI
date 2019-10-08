@@ -25,10 +25,11 @@ public class Persona {
         this.estado = estado;
     }
 
-    public Persona(String id, String nombre,char sexo) {
+    public Persona(String id, String nombre,char sexo, Estado estado) {
         this.id = id;
         this.nombre = nombre;
         this.sexo=sexo;
+        this.estado=estado;
     }
 
     public Persona() {

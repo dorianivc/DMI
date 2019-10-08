@@ -8,6 +8,7 @@ package personas.presentacion.edicion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import personas.logica.Persona;
+import personas.presentacion.listado.Estado;
 
 /**
  *
@@ -29,14 +30,14 @@ public class Controller {
         try {
             model.setPersona(personas.logica.Model.instance().consultar(id));
         } catch (Exception ex) {
-            model.setPersona(new Persona(id,"NO EXISTE!!!",'M'));
+            model.setPersona(new Persona(id,"NO EXISTE!!!",'M', new Estado("001","Soltero")));
         }
     }
     
     public void agregar(Persona p){
         try {
             personas.logica.Model.instance().agrear(p);
-            model.setPersona(new Persona("","",'I'));
+            model.setPersona(new Persona("","",'I',new Estado("001","Soltero")));
         } catch (Exception ex) {
 
         }

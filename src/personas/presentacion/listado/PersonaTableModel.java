@@ -77,7 +77,7 @@ public class PersonaTableModel extends AbstractTableModel{
             case 1: return p.getNombre();
             case 2: return sexo(p);
             case 3: return p.esNacional();
-            case 4: return p.getEstado();
+            case 4: return p.getEstado().toString();
             default: return "";
         }
     }    

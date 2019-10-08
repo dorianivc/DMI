@@ -171,6 +171,7 @@ public class View extends javax.swing.JFrame implements Observer{
         p.setId(id.getText());
         p.setNombre(nombre.getText());
         p.setSexo(this.sexoMasculino.isSelected()? 'M': 'F');
+        p.setEstado((Estado) jEstadoComboBox.getSelectedItem());
         controller.agregar(p);
     }//GEN-LAST:event_agregarActionPerformed
 

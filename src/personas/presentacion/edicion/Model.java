@@ -20,7 +20,7 @@ public class Model extends Observable{
    public List<Estado> estados;
 
     public Model() {
-        persona=new Persona("","",'F');
+        persona=new Persona("","",'F', new Estado("001","Soltero"));
     }
 
     public Persona getPersona() {

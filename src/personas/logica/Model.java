@@ -31,7 +31,7 @@ public class Model {
         return result;
     }
   
-    public List<Persona> buscar(String nombre){
+    public List<Persona> buscar(String nombre) throws Exception{
        List<Persona> result= personas.PersonaSearch(nombre);
        return result;
     }

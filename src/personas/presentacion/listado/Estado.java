@@ -5,12 +5,26 @@
  */
 package personas.presentacion.listado;
 
+import java.util.Objects;
+
 public class Estado {
     public String estado;
     public String descripcion;
 
+   
+                
     public String getEstado() {
         return estado;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    public boolean equals(String cod) {
+        return cod.equals(estado);
     }
 
     @Override
